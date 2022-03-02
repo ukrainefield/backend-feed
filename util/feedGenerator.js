@@ -60,7 +60,7 @@ function telegramToFeed(telegramMessages) {
       categories: message.categories,
       type: "telegram",
       telegramData: {
-        messageID: message.messageID,
+        messageId: message.messageId,
         authorName: message.authorName,
         messageURL: message.messageURL,
       },
