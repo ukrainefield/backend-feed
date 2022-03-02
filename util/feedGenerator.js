@@ -28,6 +28,7 @@ function tweetsToFeed(tweets) {
     messages.push({
       created_at: tweet.created_at,
       text: tweet.full_text,
+      messageURL: `https://twitter.com/${tweet.authorUsername}/status/${tweet.tweetID}`,
       images: tweet.images,
       videos: tweet.videos,
       author: tweet.authorUsername,
@@ -40,7 +41,6 @@ function tweetsToFeed(tweets) {
         authorUsername: tweet.authorUsername,
         authorDisplayName: tweet.authorDisplayName,
         profileImage: tweet.profileImage,
-        tweetUrl: `https://twitter.com/${tweet.authorUsername}/status/${tweet.tweetID}`,
       },
     });
   });
@@ -53,6 +53,7 @@ function telegramToFeed(telegramMessages) {
     messages.push({
       created_at: message.time,
       text: message.text,
+      messageURL: message.messageURL,
       images: message.image ? [message.image] : [],
       videos: message.video ? [message.video] : [],
       author: message.user,
@@ -62,7 +63,6 @@ function telegramToFeed(telegramMessages) {
       telegramData: {
         messageId: message.messageId,
         authorName: message.authorName,
-        messageURL: message.messageURL,
       },
     });
   });
