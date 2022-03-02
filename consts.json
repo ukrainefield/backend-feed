@@ -1,0 +1,8 @@
+{
+  "Cache": {
+    "Cache_TTL": 60
+  },
+  "Feed": {
+    "maxLength": 5000
+  }
+}
