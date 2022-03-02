@@ -4,5 +4,12 @@
   },
   "Feed": {
     "maxLength": 5000
+  },
+  "Headers": {
+    "wasCached": "X-response-was-cached",
+    "cachedAtTime": "X-response-cached-at",
+    "expiresAtTime": "X-response-expires-at",
+    "cacheTTL": "X-response-cache-ttl",
+    "cacheExpiresIn": "X-response-cache-expires-in"
   }
 }
