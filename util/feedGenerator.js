@@ -40,6 +40,7 @@ function tweetsToFeed(tweets) {
         authorUsername: tweet.authorUsername,
         authorDisplayName: tweet.authorDisplayName,
         profileImage: tweet.profileImage,
+        tweetUrl: `https://twitter.com/${tweet.authorUsername}/status/${tweet.tweetID}`,
       },
     });
   });
