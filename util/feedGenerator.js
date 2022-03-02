@@ -15,7 +15,11 @@ async function generateFeed() {
 
   messages.length = Math.min(messages.length, Feed.maxLength);
 
-  return messages;
+  return {
+    maxMessages: Feed.maxLength,
+    messages: messages,
+    stopTheWarInUkraine: "yes please :)",
+  };
 }
 
 function tweetsToFeed(tweets) {
