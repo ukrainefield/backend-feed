@@ -25,7 +25,9 @@ router.get("/all", async function (req, res, next) {
   }
 
   try {
-    const data = await reutersMapModel.find({}, { _id: 0, __v: 0 });
+    const data = await reutersMapModel
+      .find({}, { _id: 0, __v: 0 })
+      .sort({ epochTime: -1 });
     cache.set(cacheKey, data, consts.Cache.Cache_TTL);
     return res.status(200).json(data);
   } catch (e) {
