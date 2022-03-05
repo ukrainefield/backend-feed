@@ -25,11 +25,12 @@ router.get("/all", async function (req, res, next) {
   }
 
   try {
-    const data = await reutersMapModel
+    let data = await reutersMapModel
       .find({}, { _id: 0, __v: 0 })
       .sort({ epochTime: -1 });
-    cache.set(cacheKey, data, consts.Cache.Cache_TTL);
-    return res.status(200).json(data);
+    const responseData = {mapData: data, GhostOfKiev: "🚜&✈️"}
+    cache.set(cacheKey, responseData, consts.Cache.Cache_TTL);
+    return res.status(200).json(responseData);
   } catch (e) {
     return res.status(500).json({ message: e.message });
   }
