@@ -3,7 +3,7 @@
     "Cache_TTL": 60
   },
   "Feed": {
-    "maxLength": 5000
+    "maxLength": 2500
   },
   "Headers": {
     "wasCached": "X-response-was-cached",
