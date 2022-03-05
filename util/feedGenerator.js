@@ -3,10 +3,14 @@ const telegramModel = require("../models/telegramPostModel");
 const { Feed } = require("../consts.json");
 async function generateFeed() {
   let messages = [];
-  const tweets = await twitterModel.find({}).sort({ epochTime: "descending" });
+  const tweets = await twitterModel
+    .find({})
+    .sort({ epochTime: "descending" })
+    .limit(Feed.maxLength);
   const telegramMessages = await telegramModel
     .find({})
-    .sort({ epochTime: "descending" });
+    .sort({ epochTime: "descending" })
+    .limit(Feed.maxLength);
 
   messages = tweetsToFeed(tweets);
   messages = messages.concat(telegramToFeed(telegramMessages));
