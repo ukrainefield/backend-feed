@@ -5,6 +5,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const feedRouter = require("./routes/feed");
+const reutersMapRouter = require("./routes/reutersMap");
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const app = express();
@@ -20,10 +21,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/feed", feedRouter);
+app.use("/map", reutersMapRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.get("*", function (req, res) {
+  res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
 });
 
 // error handler
