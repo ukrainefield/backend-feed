@@ -11,16 +11,7 @@ router.get("/all", async function (req, res, next) {
   const cachedResponse = await cache.get(cacheKey);
   if (cachedResponse) {
     console.log("Cached all reuters map");
-    const cacheTTL = cache.getTtl(cacheKey);
-
-    res.setHeader(consts.Headers.wasCached, 1);
-    res.setHeader(consts.Headers.cacheTTL, consts.Cache.Cache_TTL);
-    res.setHeader(
-      consts.Headers.cachedAtTime,
-      cacheTTL - consts.Cache.Cache_TTL * 1000
-    );
-    res.setHeader(consts.Headers.expiresAtTime, cacheTTL);
-
+    res.setHeader("Cache-control", `public, max-age=${consts.Cache.Cache_TTL}`);
     return res.status(200).json(cachedResponse);
   }
 
@@ -30,6 +21,8 @@ router.get("/all", async function (req, res, next) {
       .sort({ epochTime: -1 });
     const responseData = { mapData: data, GhostOfKiev: "🚜&✈️" };
     cache.set(cacheKey, responseData, consts.Cache.Cache_TTL);
+    res.setHeader("Cache-control", `public, max-age=${consts.Cache.Cache_TTL}`);
+    res.setHeader("Cache-Control", "must-revalidate");
     return res.status(200).json(responseData);
   } catch (e) {
     return res.status(500).json({ message: e.message });
