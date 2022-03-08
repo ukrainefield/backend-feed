@@ -58,14 +58,14 @@ function telegramToFeed(telegramMessages) {
     let videos = [];
     if (message.picture) {
       if (Array.isArray(message.picture)) {
-        images = message.picture;
+        images = message.picture.filter(n => n);
       } else {
         images.push(message.picture);
       }
     }
     if (message.video) {
       if (Array.isArray(message.video)) {
-        videos = message.video;
+        videos = message.video.filter(n => n);
       } else {
         videos.push(message.video);
       }
