@@ -54,12 +54,28 @@ function tweetsToFeed(tweets) {
 function telegramToFeed(telegramMessages) {
   let messages = [];
   telegramMessages.forEach((message) => {
+    let images = [];
+    let videos = [];
+    if (message.picture) {
+      if (Array.isArray(message.picture)) {
+        images = message.picture;
+      } else {
+        images.push(message.picture);
+      }
+    }
+    if (message.video) {
+      if (Array.isArray(message.video)) {
+        videos = message.video;
+      } else {
+        videos.push(message.video);
+      }
+    }
     messages.push({
       created_at: message.time,
       text: message.text,
       messageURL: message.messageURL,
-      images: message.image ? [message.image] : [],
-      videos: message.video ? [message.video] : [],
+      images: images,
+      videos: videos,
       author: message.user,
       epochTime: message.epochTime,
       categories: message.categories,
