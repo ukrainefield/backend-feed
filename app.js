@@ -9,6 +9,14 @@ const reutersMapRouter = require("./routes/reutersMap");
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const app = express();
+const promBundle = require('express-prom-bundle');
+const metricsMiddleware = promBundle({
+  includeMethod: true,
+  includeStatusCode: true,
+  promClient: {
+    collectDefaultMetrics: {},
+  },
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -19,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(metricsMiddleware);
 
 app.use("/feed", feedRouter);
 app.use("/map", reutersMapRouter);
